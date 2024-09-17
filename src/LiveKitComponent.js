@@ -70,7 +70,17 @@ const LiveKitComponent = () => {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container ar">
+      <div className="title-container">
+        <h1 className="sub-header" id="sub-head">
+          قم بأتمتة المكالمات الهاتفية الواردة والصادرة باستخدام الذكاء
+          الاصطناعي بدون تدخل بشري
+        </h1>
+        <p className="sub-title">
+          مما يقلل تكاليف التشغيل للشركات و يوفر لعملائك خدمة سريعة وسلسة ويقلل
+          من أوقات الانتظار بشكل كبير
+        </p>
+      </div>
       <LiveKitRoom
         audio={true} // only audio streaming
         video={false}
