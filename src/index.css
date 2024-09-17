@@ -12,6 +12,14 @@ code {
     monospace;
 } */
 
+.noto-sans-arabic-ar > {
+  font-family: "Noto Sans Arabic", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
 .app-container {
   color: #ffffff;
   display: flex;
@@ -222,7 +230,8 @@ body {
 
 .sub-header {
   line-height: 1.5;
-  font-size: 1.5em;
+  font-size: 2em;
+  font-family: "Noto Sans Arabic", sans-serif;
 }
 
 .sub-header {
@@ -231,6 +240,8 @@ body {
 
 .sub-title {
   color: #000 !important;
+  font-family: "Noto Sans Arabic", sans-serif;
+  font-size: 1.5em;
 }
 
 body {
@@ -253,11 +264,17 @@ body {
     width: 120px;
     height: 110px;
   }
+
+  .sub-title {
+    font-size: 1em;
+  }
+  .sub-header {
+    font-size: 1.5em;
+  }
 }
 
 .anim {
   width: 100vw;
-  height: 70vh;
   background-color: inherit;
   position: absolute;
   bottom: 0;

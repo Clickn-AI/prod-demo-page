@@ -21,6 +21,7 @@ import WavyImage from "./WavyImage.js";
 // Define the LiveKitComponent
 const LiveKitComponent = () => {
   const serverUrl = "wss://hamsai-tkl51jnb.livekit.cloud";
+  const [agentId, setAgentId] = useState(null);
   const [isStreaming, setIsStreaming] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [audioContextStarted, setAudioContextStarted] = useState(false);
@@ -28,11 +29,18 @@ const LiveKitComponent = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [isAgentSpeaking, setIsAgentSpeaking] = useState(false);
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    setAgentId(queryParams.get("agent_id"));
+  }, [setAgentId]);
+
   // Function to handle connecting to LiveKitRoom using .then() and .catch()
   const handleConnect = () => {
-    fetch(
-      "https://api-stg.hams.ai/agents/c09d5b85-f80e-4133-9629-27da16ee5416/token"
-    )
+    if (!agentId) {
+      console.error("agentId not found in URL");
+      return;
+    }
+    fetch(`https://api-stg.hams.ai/agents/${agentId}/token`)
       .then((response) => response.json())
       .then((data) => {
         const accessToken = data;
@@ -79,7 +87,7 @@ const LiveKitComponent = () => {
           قم بأتمتة المكالمات الهاتفية الواردة والصادرة باستخدام الذكاء
           الاصطناعي بدون تدخل بشري
         </h1>
-        <p className="sub-title">
+        <p className="sub-title noto-sans-arabic-ar">
           مما يقلل تكاليف التشغيل للشركات و يوفر لعملائك خدمة سريعة وسلسة ويقلل
           من أوقات الانتظار بشكل كبير
         </p>
