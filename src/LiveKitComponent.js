@@ -1,4 +1,5 @@
 // import logo from "./logo.svg";
+import logo from "./assets/images/hams_ai_logo.png";
 // import "./LiveKitComponent.css";
 
 // Import necessary hooks and components
@@ -16,7 +17,7 @@ import "@livekit/components-styles";
 // import '@fortawesome/fontawesome-free/css/all.min.css';
 // import "../assets/styles/banner.scss";
 // import { useTranslation } from "react-i18next";
-
+import WavyImage from "./WavyImage.js";
 // Define the LiveKitComponent
 const LiveKitComponent = () => {
   const serverUrl = "wss://hamsai-tkl51jnb.livekit.cloud";
@@ -71,6 +72,8 @@ const LiveKitComponent = () => {
 
   return (
     <div className="app-container ar">
+      <WavyImage></WavyImage>
+      <img className="logo" src={logo} alt="Hams.AI Logo" />
       <div className="title-container">
         <h1 className="sub-header" id="sub-head">
           قم بأتمتة المكالمات الهاتفية الواردة والصادرة باستخدام الذكاء
