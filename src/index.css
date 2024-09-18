@@ -36,6 +36,7 @@ code {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
 }
 
 .title {
@@ -57,7 +58,7 @@ code {
   display: grid;
   justify-items: center;
   align-items: center;
-  width: 100%;
+  width: 40%;
   justify-content: center;
 }
 
@@ -88,7 +89,23 @@ code {
 }
 
 .toggle-text {
-  margin-top: 10px;
+  margin-top: 15%;
+  background: gray;
+  opacity: 0.5;
+  color: black;
+  width: 50%;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 3px;
+}
+
+.toggle-text > h4 {
+  margin: 0;
+  padding: 1%;
+  color: white;
+  font-size: 0.8em;
 }
 
 .visualizer {
@@ -156,7 +173,7 @@ code {
 }
 
 .sub-header-demo {
-  color: #000 !important;
+  color: #fff !important;
 }
 
 .mic-container {
@@ -267,9 +284,10 @@ body {
 
   .sub-title {
     font-size: 1em;
+    line-height: 1.5;
   }
   .sub-header {
-    font-size: 1.5em;
+    font-size: 1em;
   }
 }
 
@@ -280,4 +298,14 @@ body {
   bottom: 0;
   left: 0;
   z-index: -1;
+}
+
+.container-mic-demo {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-content: center;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
 }

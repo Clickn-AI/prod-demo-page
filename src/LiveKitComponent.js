@@ -220,9 +220,9 @@ function MicrophoneButton({
       </div>
 
       <div className="toggle-text">
-        <h3 className="sub-header-demo">
-          {isStreaming ? "... تحدث الأن" : "اضغط المايك للتحدث"}
-        </h3>
+        <h4 className="sub-header-demo">
+          {isStreaming ? "تحدث الأن ..." : "اضغط المايك للتحدث"}
+        </h4>
       </div>
 
       <div>
