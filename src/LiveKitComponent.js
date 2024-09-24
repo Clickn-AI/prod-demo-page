@@ -45,7 +45,6 @@ const LiveKitComponent = () => {
       .then((data) => {
         const accessToken = data;
         setToken(accessToken);
-        console.log(accessToken);
         setIsMuted(false);
         setIsStreaming(true); // Start streaming after token is set
       })
