@@ -20,7 +20,7 @@ import "@livekit/components-styles";
 import WavyImage from "./WavyImage.js";
 // Define the LiveKitComponent
 const LiveKitComponent = () => {
-  const serverUrl = "wss://hamsai-tkl51jnb.livekit.cloud";
+  const serverUrl = "wss://api-stg.hams.workers.dev";
   const [agentId, setAgentId] = useState(null);
   const [isStreaming, setIsStreaming] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
