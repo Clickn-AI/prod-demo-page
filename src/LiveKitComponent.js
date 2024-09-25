@@ -28,6 +28,7 @@ const LiveKitComponent = () => {
   const [token, setToken] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const [isAgentSpeaking, setIsAgentSpeaking] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -40,6 +41,7 @@ const LiveKitComponent = () => {
       console.error("agentId not found in URL");
       return;
     }
+    setLoading(true);
     fetch(`https://api-stg.hams.ai/agents/${agentId}/token`)
       .then((response) => response.json())
       .then((data) => {
@@ -47,8 +49,10 @@ const LiveKitComponent = () => {
         setToken(accessToken);
         setIsMuted(false);
         setIsStreaming(true); // Start streaming after token is set
+        setTimeout(() => setLoading(false), 5000);
       })
       .catch((error) => {
+        setLoading(false);
         console.error("Failed to fetch token:", error);
       });
   };
@@ -65,6 +69,7 @@ const LiveKitComponent = () => {
     setIsMuted((prev) => !prev);
     setIsStreaming((prev) => !prev);
     setIsSpeaking((prev) => !prev);
+    // setLoading((prev) => !prev);
   };
 
   // Start the AudioContext on user interaction to avoid autoplay issues in Safari
@@ -107,12 +112,13 @@ const LiveKitComponent = () => {
             isSpeaking={isSpeaking}
             isMuted={isMuted}
             isAgentSpeaking={isAgentSpeaking}
+            isLoading={isLoading}
           />
         </div>
 
         <RoomAudioRenderer />
 
-        {isStreaming && (
+        {isStreaming & !isLoading && (
           <AudioProcessor
             isSpeaking={isSpeaking}
             setIsSpeaking={setIsSpeaking}
@@ -161,6 +167,7 @@ function MicrophoneButton({
   isStreaming,
   onToggleMicrophone,
   isSpeaking,
+  isLoading,
 }) {
   // const { t } = useTranslation();
   return (
@@ -179,6 +186,7 @@ function MicrophoneButton({
             viewBox="0 0 32 32"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className={`${isLoading ? "disable" : ""}`}
           >
             <path
               d="M15.9998 25.3333V28M15.9998 25.3333C11.0955 25.3333 8.19552 22.3268 6.68555 20M15.9998 25.3333C20.9041 25.3333 23.804 22.3268 25.314 20M21.3331 9.33333V14.6667C21.3331 17.6122 18.9453 20 15.9998 20C13.0543 20 10.6664 17.6122 10.6664 14.6667V9.33333C10.6664 6.38781 13.0543 4 15.9998 4C18.9453 4 21.3331 6.38781 21.3331 9.33333Z"
@@ -187,9 +195,37 @@ function MicrophoneButton({
               strokeLinecap="square"
             ></path>
           </svg>
+
+          <svg
+            version="1.1"
+            id="L9"
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            viewBox="0 0 100 100"
+            enableBackground="new 0 0 0 0"
+            xml="preserve"
+            className={isLoading ? "" : "disable"}
+          >
+            <path
+              fill="#fff"
+              d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+            >
+              <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                dur="1s"
+                from="0 50 50"
+                to="360 50 50"
+                repeatCount="indefinite"
+              />
+            </path>
+          </svg>
+
           <div
             className={` mic-container ${
-              isSpeaking & isStreaming ? "" : "invissible"
+              isSpeaking & isStreaming & !isLoading ? "" : "invissible"
             } `}
           >
             <span className="mic"></span>
@@ -230,16 +266,6 @@ function MicrophoneButton({
     </div>
   );
 }
-
-// function Visualizer({ isActive , isStreamNow}) {
-//   return (
-//     <div className={`visualizer ${(isActive & isStreamNow) ? 'active' : ''}`}>
-//       {[...Array(10)].map((_, index) => (
-//         <div key={index} className="bar"></div>
-//       ))}
-//     </div>
-//   );
-// }
 
 function AudioProcessor({ setIsSpeaking }) {
   const audioContextRef = useRef(null);
