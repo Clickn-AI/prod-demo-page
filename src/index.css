@@ -215,16 +215,28 @@ code {
 .invissible {
   visibility: hidden;
 }
-.disable {
-  display: none;
-  transition: opacity 0.5s ease-in-out;
-  pointer-events: none; /* Prevent interaction while hidden */
+
+.svg-container {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.display.show {
+.disable {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+}
+.disable.show {
   opacity: 1;
   pointer-events: auto; /* Enable interaction when shown */
 }
 
+.disable.hide {
+  opacity: 0;
+  pointer-events: auto; /* Enable interaction when shown */
+}
 @keyframes circle-size {
   100% {
     opacity: 0;

@@ -180,48 +180,47 @@ function MicrophoneButton({
           className={`mic-button streaming ${isStreaming ? "streaming" : ""}`}
         >
           {/* <i className="fas fa-microphone"></i> */}
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className={`${isLoading ? "disable" : ""}`}
-          >
-            <path
-              d="M15.9998 25.3333V28M15.9998 25.3333C11.0955 25.3333 8.19552 22.3268 6.68555 20M15.9998 25.3333C20.9041 25.3333 23.804 22.3268 25.314 20M21.3331 9.33333V14.6667C21.3331 17.6122 18.9453 20 15.9998 20C13.0543 20 10.6664 17.6122 10.6664 14.6667V9.33333C10.6664 6.38781 13.0543 4 15.9998 4C18.9453 4 21.3331 6.38781 21.3331 9.33333Z"
-              stroke="#FFF"
-              strokeWidth="2"
-              strokeLinecap="square"
-            ></path>
-          </svg>
-
-          <svg
-            version="1.1"
-            id="L9"
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            viewBox="0 0 100 100"
-            enableBackground="new 0 0 0 0"
-            xml="preserve"
-            className={isLoading ? "" : "disable"}
-          >
-            <path
-              fill="#fff"
-              d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+          <div className="svg-container">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={`disable ${isLoading ? "hide" : "show"}`}
             >
-              <animateTransform
-                attributeName="transform"
-                attributeType="XML"
-                type="rotate"
-                dur="1s"
-                from="0 50 50"
-                to="360 50 50"
-                repeatCount="indefinite"
-              />
-            </path>
-          </svg>
+              <path
+                d="M15.9998 25.3333V28M15.9998 25.3333C11.0955 25.3333 8.19552 22.3268 6.68555 20M15.9998 25.3333C20.9041 25.3333 23.804 22.3268 25.314 20M21.3331 9.33333V14.6667C21.3331 17.6122 18.9453 20 15.9998 20C13.0543 20 10.6664 17.6122 10.6664 14.6667V9.33333C10.6664 6.38781 13.0543 4 15.9998 4C18.9453 4 21.3331 6.38781 21.3331 9.33333Z"
+                stroke="#FFF"
+                strokeWidth="2"
+                strokeLinecap="square"
+              ></path>
+            </svg>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="100"
+              height="100"
+              viewBox="0 0 100 100"
+              fill="none"
+              className={`disable ${isLoading ? "show" : "hide"}`}
+            >
+              <path
+                fill="#fff"
+                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+              >
+                <animateTransform
+                  attributeName="transform"
+                  attributeType="XML"
+                  type="rotate"
+                  dur="1s"
+                  from="0 50 50"
+                  to="360 50 50"
+                  repeatCount="indefinite"
+                />
+              </path>
+            </svg>
+          </div>
 
           <div
             className={` mic-container ${
@@ -256,7 +255,11 @@ function MicrophoneButton({
 
       <div className="toggle-text">
         <h4 className="sub-header-demo">
-          {isStreaming ? "تحدث الأن ..." : "اضغط المايك للتحدث"}
+          {isStreaming
+            ? isLoading
+              ? "جاري التحميل ..."
+              : "تحدث الأن ..."
+            : "اضغط المايك للتحدث"}
         </h4>
       </div>
 
@@ -302,7 +305,7 @@ function AudioProcessor({ setIsSpeaking }) {
           dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
 
         // Set speaking threshold (you can adjust this value based on the environment)
-        if (volume >= 5) {
+        if (volume >= 7) {
           setIsSpeaking(true);
         } else {
           setIsSpeaking(false);
