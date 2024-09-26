@@ -18,6 +18,7 @@ import "@livekit/components-styles";
 // import "../assets/styles/banner.scss";
 // import { useTranslation } from "react-i18next";
 import WavyImage from "./WavyImage.js";
+
 // Define the LiveKitComponent
 const LiveKitComponent = () => {
   const serverUrl = "wss://api-stg.hams.workers.dev";

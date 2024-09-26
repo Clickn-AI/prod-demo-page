@@ -4,6 +4,13 @@ import "./index.css";
 import LiveKitComponent from "./LiveKitComponent";
 import reportWebVitals from "./reportWebVitals";
 
+if (process.env.NODE_ENV === "production" || process.env.NODE_ENV === "prod") {
+  console.log = () => {};
+  console.info = () => {};
+  console.warn = () => {};
+  console.error = () => {};
+}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
